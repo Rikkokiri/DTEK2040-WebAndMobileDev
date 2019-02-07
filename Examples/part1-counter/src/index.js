@@ -7,25 +7,28 @@ class App extends React.Component {
         this.state = {
             counter: 1
         }
+    }
 
-        /* The state of React components in the variable this.state should not be updated directly.
-         * Instead, you must always use function setState for this purpose.
-         * Calling the function updates the state and causes the component to be re-rendered
-         * (assuming this has not been prevented, as we will discuss later). */
-        /*setInterval(() => {
-            this.setState({counter: this.state.counter + 1 })
-        }, 1000)
-        */
+    /* The reason why this of an arrow function works in a way similar to e.g. the this keyword in Java
+     * is that the arrow functions have a so called lexical this.
+     * In other words, this is determined according to the context where the method is defined in.
+     * When a method is defined as a class property, the definition context is the App component. */
+    incrementCounterByOne = () => {
+        this.setState({ counter: this.state.counter + 1 })
+    }
+
+    resetCounter = () => {
+        this.setState({counter: 0 })
     }
 
     render() {
         return (
             <div>
                 <div>{this.state.counter}</div>
-                <button onClick={() => this.setState({ counter: this.state.counter + 1 })}>
+                <button onClick={this.incrementCounterByOne}>
                     Plus
                 </button>
-                <button onClick={() => this.setState({ counter: 0 })}>
+                <button onClick={this.resetCounter}>
                     Reset Counter
                 </button>
             </div>
