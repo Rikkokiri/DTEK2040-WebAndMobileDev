@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 
 const Display = ({counter}) => <div>{counter}</div>
 
+const Button = (props) => (
+    <button onClick={props.handleClick}>
+        {props.text}
+    </button>
+)
+
 class App extends React.Component {
     constructor(props) {
         super(props)
@@ -29,12 +35,8 @@ class App extends React.Component {
         return (
             <div>
                 <Display counter = {this.state.counter} />
-                <button onClick={this.incrementCounterByOne}>
-                    Plus
-                </button>
-                <button onClick={this.resetCounter}>
-                    Reset Counter
-                </button>
+                <Button handleClick={this.incrementCounterByOne} text="Plus" />
+                <Button handleClick={this.resetCounter} text="Reset Counter" />
             </div>
         )
     }
