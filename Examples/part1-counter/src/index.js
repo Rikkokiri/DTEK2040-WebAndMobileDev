@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const Display = ({counter}) => {
+    return (
+        <div>{counter}</div>
+    )
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props)
@@ -26,7 +32,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div>{this.state.counter}</div>
+                <Display counter = {this.state.counter} />
                 <button onClick={this.incrementCounterByOne}>
                     Plus
                 </button>
@@ -41,32 +47,3 @@ class App extends React.Component {
 ReactDOM.render(
     <App />, document.getElementById('root')
 )
-
-/*
-const App = (props) => {
-    const {counter} = props
-    
-    return (
-        <div>
-            <h1>Counter</h1>
-            <div>{counter.value}</div>
-        </div>
-    )
-}
-
-const counter = {
-    value: 1
-}
-
-const rendering = () => {
-    ReactDOM.render(
-        <App counter={counter}/>,
-        document.getElementById('root')
-    )
-}
-
-setInterval(() => {
-    rendering()
-    counter.value += 1;
-}, 1000)
-*/
