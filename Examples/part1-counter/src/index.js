@@ -5,7 +5,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            counter: 1
+            counter: 0
         }
     }
 
@@ -14,7 +14,9 @@ class App extends React.Component {
      * In other words, this is determined according to the context where the method is defined in.
      * When a method is defined as a class property, the definition context is the App component. */
     incrementCounterByOne = () => {
-        this.setState({ counter: this.state.counter + 1 })
+        this.setState((prevState) => ({
+            counter: prevState.counter + 1
+        }));
     }
 
     resetCounter = () => {
