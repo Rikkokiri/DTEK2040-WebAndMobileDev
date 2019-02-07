@@ -12,14 +12,23 @@ class App extends React.Component {
          * Instead, you must always use function setState for this purpose.
          * Calling the function updates the state and causes the component to be re-rendered
          * (assuming this has not been prevented, as we will discuss later). */
-        setInterval(() => {
+        /*setInterval(() => {
             this.setState({counter: this.state.counter + 1 })
         }, 1000)
+        */
     }
 
     render() {
         return (
-            <div>{this.state.counter}</div>
+            <div>
+                <div>{this.state.counter}</div>
+                <button onClick={() => this.setState({ counter: this.state.counter + 1 })}>
+                    Plus
+                </button>
+                <button onClick={() => this.setState({ counter: 0 })}>
+                    Reset Counter
+                </button>
+            </div>
         )
     }
 }
