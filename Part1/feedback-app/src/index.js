@@ -10,12 +10,12 @@ const Button = ({text, clickHandler}) => (
 const Statistics = ({data}) => {
     // Calculate percentage of positives
     const positive = (positiveCount, totalCount) => {
-        return Math.round((positiveCount / totalCount)*1000 ) / 10
+        return Math.round((positiveCount / totalCount)*1000 ) / 10;
     }
 
     // Calculate average
     const average = (valueSum, totalCount) => {
-        return Math.round( (valueSum / totalCount) * 100 ) / 100
+        return Math.round( (valueSum / totalCount) * 100 ) / 100;
     }
 
     if(data.voteCount === 0) {
@@ -27,24 +27,19 @@ const Statistics = ({data}) => {
     return (
         <table>
             <tbody>
-                <Statistic name="Good" value={data.good}/> {/* Number of 'good' reviews */}
-                <Statistic name="Neutral" value={data.neutral}/> {/* Number of 'neutral' reviews */}
-                <Statistic name="Bad" value={data.bad}/> {/* Number of 'bad' reviews */}
-                <Statistic name="Average" value={average(data.sum, data.voteCount)}/> {/* Average */}
-                <Statistic name="Positive" value={positive(data.good, data.voteCount).toString() + " %"} /> {/* Percentage of positive reviews */}
+                <Statistic name="Good" value={data.good}/>
+                <Statistic name="Neutral" value={data.neutral}/>
+                <Statistic name="Bad" value={data.bad}/>
+                <Statistic name="Average" value={average(data.sum, data.voteCount)}/>
+                <Statistic name="Positive" value={positive(data.good, data.voteCount).toString() + " %"} />
             </tbody>
         </table>
     )
 }
 
-const Statistic = ({name, value}) => {
-    return (
-        <tr>
-        <td>{name}</td>
-        <td>{value}</td>
-        </tr>
-    )
-}
+const Statistic = ({name, value}) => (
+        <tr><td>{name}</td><td>{value}</td></tr>
+)
 
 class App extends React.Component {
     constructor(props) {
