@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Display = ({counter}) => {
-    return (
-        <div>{counter}</div>
-    )
-}
+const Display = ({counter}) => <div>{counter}</div>
 
 class App extends React.Component {
     constructor(props) {
