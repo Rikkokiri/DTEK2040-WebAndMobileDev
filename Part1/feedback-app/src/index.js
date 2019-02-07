@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 
-const Button = ({text, clickHandler}) => (
-    <button onClick={clickHandler}>
+const CustomButton = ({text, clickHandler}) => (
+    <button onClick={clickHandler} className="CustomButton">
         {text}
     </button>
 )
@@ -86,14 +87,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="AppContainer">
                 <h2>Give Feedback</h2>
-                <Button text = "Good" clickHandler={this.clickGood} />
-                <Button text = "Neutral" clickHandler={this.clickNeutral} />
-                <Button text = "Bad" clickHandler={this.clickBad} />
+                <CustomButton text = "Good" clickHandler={this.clickGood} />
+                <CustomButton text = "Neutral" clickHandler={this.clickNeutral} />
+                <CustomButton text = "Bad" clickHandler={this.clickBad} />
                 
-                <h2>Statistics</h2>
-                <Statistics data={this.state}/>
+                <div className="StatisticsContainer">
+                    <h2>Statistics</h2>
+                    <Statistics data={this.state}/>
+                </div>
             </div>
         )
     }
