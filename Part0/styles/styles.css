@@ -1,11 +1,12 @@
 :root {
     --highlight-color: #e13e22;
+    --order-button-color: rgb(237, 83, 56);
 }
 
 body {
     margin: 0 auto;
     font-size: 1em;   
-    
+    font-family: 'Dosis', sans-serif;   
 }
 
 .description {
@@ -54,10 +55,45 @@ a {
     color: var(--highlight-color);
 }
 
+/* - - - Form Elements - - - */
+
+.custom-radio, .option-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.custom-radio {
+    border: 1px solid #e2e2e2;
+    border-radius: 0;
+    margin: 0px 4px 4px 0;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+}
+
+.custom-radio:not(:disabled):not(.disabled).active,
+.custom-radio:not(:disabled):not(.disabled):active {
+    border-color: #000;
+    box-shadow: none;
+}
+
+input[type="submit"] {
+    background: var(--order-button-color);
+    border: none;
+    color: #fff;
+    padding: 0.75em 1em;
+    margin: 1.5em 0;
+    width: 80%;
+}
+
+.option-title {
+    text-transform: uppercase;
+    margin: 0.5em 0;
+}
+
 /* - - - Dimensions table - - - */
 
 details {
-    margin-bottom: 15px;
+    margin: 5px 0 15px 5px;
 }
 
 details p, details summary {
@@ -67,7 +103,7 @@ details p, details summary {
 
 table.dimensions {
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.9em;
     width: 90%;
     margin: 0 auto 10px auto;
 }

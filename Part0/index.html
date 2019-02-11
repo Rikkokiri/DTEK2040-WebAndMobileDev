@@ -10,6 +10,10 @@
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
@@ -76,15 +80,21 @@
                 <p class="price">$ 206.00</p>
 
                 <!-- TABLE containing dimensions -->
-                <form action="">
-                    <p>COLOR</p>
+                <form action="" class="addToCart">
+                    <div class="option-title">Color</div>
                     <button>Black</button>
                     <button>Green</button>
                     <button>Blue</button>
 
-                    <p>SIZE</p>
-                    <input type="radio" name="size" value="21" checked> 21 LITER
-                    <input type="radio" name="size" value="31"> 31 LITER<br />
+                    <div class="option-title">Size</div>
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                        <label class="btn active custom-radio" for="size21">
+                            <input type="radio" name="bagsize" id="size21" autocomplete="off" checked> 21 Liter
+                        </label>
+                        <label class="btn custom-radio" for="size31">
+                            <input type="radio" name="bagsize" id="size31" autocomplete="off"> 31 Liter
+                        </label>
+                    </div>
 
                     <details>
                         <summary>Dimensions</summary>
@@ -113,13 +123,43 @@
                         <p>* Roll top fully extended</p>
                     </details>
 
-                    <p>Save with an accessories bundle:</p>
+                    <div class="option-title">Save with an accessories bundle</div>
 
-                    <button>No Bundle</button>
-                    <button>Travel Bundle</button>
-                    <button>Photography Bundle</button>
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                        <label class="btn active custom-radio" for="nobundle">
+                            <input type="radio" name="bundle" id="nobundle" autocomplete="off" checked> No Bundle
+                        </label>
+                        <label class="btn custom-radio" for="travelbundle">
+                            <input type="radio" name="budnle" id="travelbundle" autocomplete="off"> Travel Bundle
+                        </label>
+                        <label class="btn custom-radio" for="photobundle">
+                            <input type="radio" name="bundle" id="photobundle" autocomplete="off"> Photography
+                            Bundle
+                        </label>
+                    </div>
+
+                    <!-- Travel Bundle Includes: 
+                    <p>Includes:</p>
+                    <ul>
+                        <li>Rainfly</li>
+                        <li>Waist straps</li>
+                        <li>Accessory straps</li>
+                    </ul>
+                    -->
+
+                    <!-- Photography Bundle Includes: 
+                    <p>Includes:</p>
+                    <ul>
+                        <li>Rainfly</li>
+                        <li>Waist straps</li>
+                        <li>Accessory straps</li>
+                        <li>Camera cube</li>
+                    </ul>
+                    -->
 
                     <input type="submit" value="ADD TO CART" />
+
+                    <img src="img/guarantee.png" class="img-fluid" />
                 </form>
 
             </div>
@@ -151,7 +191,7 @@
         <div class="row">
 
             <div class="col-12 col-md-7">
-                <img src="img/flatlay-cropped.png" class="img-fluid" />
+                <img src="img/flatlay-cropped.png" class="img-fluid" alt="Our Guarantee: We believe in our product and stand by the quality of workmanship and materials. Reach out with whatever concern you might have and we will make it right. No need to worry. Ever." />
             </div>
             <div class="col-12 col-md-5">
 
