@@ -54,7 +54,38 @@ a {
     color: var(--highlight-color);
 }
 
+/* - - - Dimensions table - - - */
 
+details {
+    margin-bottom: 15px;
+}
+
+details p, details summary {
+    font-size: 0.9em;
+    color: var(--highlight-color);
+}
+
+table.dimensions {
+    text-align: center;
+    font-size: 0.8em;
+    width: 90%;
+    margin: 0 auto 10px auto;
+}
+
+table.dimensions span {
+    color: var(--highlight-color);
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+table.dimensions th {
+    border-top: none;
+    padding: 0.5em;
+}
+
+table.dimensions td {
+    padding: 0.5em;
+}
 
 /*  - - - Shop link (looks like a button) - - - */
 
