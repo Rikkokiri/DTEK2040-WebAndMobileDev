@@ -29,6 +29,9 @@
 </head>
 
 <body>
+    <div class="topbar">
+
+    </div>
     <nav class="navbar navbar-expand-md main-nav">
         <a class="navbar-brand" href="https://www.wandrd.com"><img src="img/logo.png" height='40' alt="WANDRD"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topnav" aria-controls="topnav"
@@ -82,9 +85,21 @@
                 <!-- TABLE containing dimensions -->
                 <form action="" class="addToCart">
                     <div class="option-title">Color</div>
-                    <button>Black</button>
-                    <button>Green</button>
-                    <button>Blue</button>
+
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                        <label class="btn active custom-radio color-radio" for="colorblack">
+                            <input type="radio" name="colorchoice" id="colorblack" autocomplete="off" checked>
+                            <!-- Black -->
+                        </label>
+                        <label class="btn custom-radio color-radio" for="wasatch-green">
+                            <input type="radio" name="colorchoice" id="wasatch-green" autocomplete="off">
+                            <!-- Wasatch green -->
+                        </label>
+                        <label class="btn custom-radio color-radio" for="aegean-blue">
+                            <input type="radio" name="colorchoice" id="aegean-blue" autocomplete="off">
+                            <!-- Aegean blue -->
+                        </label>
+                    </div>
 
                     <div class="option-title">Size</div>
                     <div class="btn-group-toggle" data-toggle="buttons">
@@ -165,7 +180,7 @@
             </div>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-12 col-md-9 justify-content-center description">
+            <div class="col-12 col-md-9 description">
                 <!-- Description -->
                 <p>
                     The WANDRD PRVKE bag's innovative design and high-quality materials make it an award-winning
@@ -316,10 +331,26 @@
                 <!-- Support -->
                 <div class="col-md-3">
                     <h4>Support</h4>
+
                 </div>
                 <!-- Store locator -->
                 <div class="col-md-3">
                     <h4>Store Locator</h4>
+                    <a href="#" target="_blank">Find a store near me</a>
+                </div>
+            </div>
+            <!-- 
+            <div class="row justify-content-md-center">
+                <div class="col-12 col-md-9">
+                    
+                </div>
+            </div>
+            -->
+            <div class="row">
+                <div class="col-12">
+                    <hr />
+                    <p class="credits">Original design and images © 2019 <a href="https://www.wandrd.com">WANDRD</a>.
+                        This implementation by <a href="https://github.com/Rikkokiri">Rikkokiri</a></p>
                 </div>
             </div>
         </div>
