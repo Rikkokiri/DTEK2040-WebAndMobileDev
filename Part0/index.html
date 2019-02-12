@@ -86,9 +86,9 @@
                 <form action="" class="addToCart">
                     <div class="option-title">Color</div>
 
-                    <div class="btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group-toggle" data-toggle="buttons" id="colorselector">
                         <label class="btn active custom-radio color-radio" for="colorblack">
-                            <input type="radio" name="colorchoice" id="colorblack" autocomplete="off" checked>
+                            <input type="radio" name="colorchoice" id="black" autocomplete="off" checked>
                             <!-- Black -->
                         </label>
                         <label class="btn custom-radio color-radio" for="wasatch-green">
@@ -360,6 +360,15 @@
             </div>
         </div>
     </footer>
-</body>
 
+    <!-- Include scripts -->
+    <script type="text/javascript" src="scripts/listeners.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            addFormListeners();
+            console.log('Document ready!')
+        });
+    </script>
+</body>
 </html>
