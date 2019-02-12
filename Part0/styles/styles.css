@@ -70,8 +70,16 @@ a {
 }
 
 /* Highlight the search icon */
+
 .form-control:focus~.input-group-append .input-group-text {
     color: var(--highlight-color);
+}
+
+/* - - - Title - - - */
+
+h1 {
+    font-size: 2.2em;
+    text-transform: uppercase;
 }
 
 /* - - - Form Elements - - - */
@@ -329,7 +337,6 @@ footer .social-icons {
 .social-icons li {
     display: inline;
     font-size: 22px;
-    
 }
 
 .credits {

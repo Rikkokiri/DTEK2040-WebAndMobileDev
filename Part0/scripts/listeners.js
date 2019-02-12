@@ -33,6 +33,7 @@ function addFormListeners() {
         }
 
         setProductImage()
+        showBundleDetails();
     });
    
 }
@@ -40,4 +41,8 @@ function addFormListeners() {
 function setProductImage() {
     path = "img/prvke/"+bundle+"-"+color+".jpg"
     $("#main-product-photo").attr('src', path);
+}
+
+function showBundleDetails() {
+     
 }
