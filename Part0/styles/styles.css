@@ -326,17 +326,14 @@ table.dimensions td {
 
 .footer-logo {
     max-width: 60%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 footer .social-icons {
-    list-style: none;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.social-icons li {
-    display: inline;
-    font-size: 22px;
+    margin-top: 15px;
+    margin-left: 5px;
 }
 
 .credits {
