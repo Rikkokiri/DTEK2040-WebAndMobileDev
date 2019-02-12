@@ -149,6 +149,18 @@ input[type="submit"] {
     margin: 0.5em 0;
 }
 
+/* - - - Bundle details - - -  */
+
+.bundle-content {
+    display: none;
+    margin-top: 15px;
+}
+
+.bundle-content, .bundle-content ul {
+    margin-bottom: 0;
+}
+
+
 /* - - - Dimensions table - - - */
 
 details {

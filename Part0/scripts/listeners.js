@@ -3,46 +3,59 @@ let bundle = 'nobundle';
 
 function addFormListeners() {
 
-    $('#colorselector label').on('click', function(){
-        switch( $("input", this).val() ) {
+    $('#colorselector label').on('click', function () {
+        switch ($("input", this).val()) {
             case 'black':
                 color = 'black';
-                break;          
+                break;
             case 'green':
                 color = 'green';
                 break;
             case 'blue':
                 color = 'blue';
-                break;  
+                break;
         }
 
         setProductImage()
     });
 
-    $('#bundleselector label').on('click', function(){
-        switch( $("input", this).val() ) {
+    $('#bundleselector label').on('click', function () {
+        switch ($("input", this).val()) {
             case 'nobundle':
                 bundle = 'nobundle';
-                break;          
+                break;
             case 'travelbundle':
                 bundle = 'travelbundle';
                 break;
             case 'photobundle':
                 bundle = 'photobundle';
-                break;  
+                break;
         }
 
         setProductImage()
-        showBundleDetails();
+        displayBundleDetails();
     });
-   
+
 }
 
 function setProductImage() {
-    path = "img/prvke/"+bundle+"-"+color+".jpg"
+    path = "img/prvke/" + bundle + "-" + color + ".jpg"
     $("#main-product-photo").attr('src', path);
 }
 
-function showBundleDetails() {
-     
+function displayBundleDetails() {
+    switch (bundle) {
+        case 'nobundle':
+            $('#travelbundle-content').hide();
+            $('#photobundle-content').hide();
+            break;
+        case 'travelbundle':
+            $('#travelbundle-content').show();
+            $('#photobundle-content').hide();
+            break;
+        case 'photobundle':
+            $('#travelbundle-content').hide();
+            $('#photobundle-content').show();
+            break;
+    }
 }
