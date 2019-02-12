@@ -75,7 +75,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6">
-                <img src="img/front-black.jpg" class="img-fluid" />
+                <img src="img/prvke/nobundle-black.jpg" class="img-fluid" id="main-product-photo" />
             </div>
             <div class="col-12 col-md-6">
                 <h1>THE PRVKE BAG</h1>
@@ -88,26 +88,26 @@
 
                     <div class="btn-group-toggle" data-toggle="buttons" id="colorselector">
                         <label class="btn active custom-radio color-radio" for="colorblack">
-                            <input type="radio" name="colorchoice" id="black" autocomplete="off" checked>
+                            <input type="radio" name="colorchoice" id="black" value="black" autocomplete="off" checked>
                             <!-- Black -->
                         </label>
                         <label class="btn custom-radio color-radio" for="wasatch-green">
-                            <input type="radio" name="colorchoice" id="wasatch-green" autocomplete="off">
+                            <input type="radio" name="colorchoice" id="wasatch-green" value="green" autocomplete="off">
                             <!-- Wasatch green -->
                         </label>
                         <label class="btn custom-radio color-radio" for="aegean-blue">
-                            <input type="radio" name="colorchoice" id="aegean-blue" autocomplete="off">
+                            <input type="radio" name="colorchoice" id="aegean-blue" value="blue" autocomplete="off">
                             <!-- Aegean blue -->
                         </label>
                     </div>
 
                     <div class="option-title">Size</div>
-                    <div class="btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group-toggle" data-toggle="buttons" id="sizeselector">
                         <label class="btn active custom-radio" for="size21">
-                            <input type="radio" name="bagsize" id="size21" autocomplete="off" checked> 21 Liter
+                            <input type="radio" name="bagsize" id="size21" value="21" autocomplete="off" checked> 21 Liter
                         </label>
                         <label class="btn custom-radio" for="size31">
-                            <input type="radio" name="bagsize" id="size31" autocomplete="off"> 31 Liter
+                            <input type="radio" name="bagsize" id="size31" value="31" autocomplete="off"> 31 Liter
                         </label>
                     </div>
 
@@ -140,15 +140,15 @@
 
                     <div class="option-title">Save with an accessories bundle</div>
 
-                    <div class="btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group-toggle" data-toggle="buttons" id="bundleselector">
                         <label class="btn active custom-radio" for="nobundle">
-                            <input type="radio" name="bundle" id="nobundle" autocomplete="off" checked> No Bundle
+                            <input type="radio" name="bundle" id="nobundle" value="nobundle" autocomplete="off" checked> No Bundle
                         </label>
                         <label class="btn custom-radio" for="travelbundle">
-                            <input type="radio" name="budnle" id="travelbundle" autocomplete="off"> Travel Bundle
+                            <input type="radio" name="budnle" id="travelbundle" value="travelbundle" autocomplete="off"> Travel Bundle
                         </label>
                         <label class="btn custom-radio" for="photobundle">
-                            <input type="radio" name="bundle" id="photobundle" autocomplete="off"> Photography
+                            <input type="radio" name="bundle" id="photobundle" value="photobundle" autocomplete="off"> Photography
                             Bundle
                         </label>
                     </div>
@@ -367,7 +367,7 @@
     <script>
         $(document).ready(function(){
             addFormListeners();
-            console.log('Document ready!')
+            console.log('Document')
         });
     </script>
 </body>
