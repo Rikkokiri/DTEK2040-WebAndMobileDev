@@ -287,7 +287,6 @@ table.dimensions td {
     right: 0;
     bottom: 0;
     font-size: 0;
-    background: red;
     opacity: 0.03;
 }
 
@@ -346,6 +345,16 @@ table.dimensions td {
 footer .social-icons {
     margin-top: 15px;
     margin-left: 5px;
+    color: #6b6b6b;
+}
+
+footer a {
+    color: #363636;
+}
+
+footer a:hover {
+    text-decoration: none; 
+    color: var(--highlight-color);
 }
 
 .credits {
