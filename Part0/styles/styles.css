@@ -304,6 +304,8 @@ table.dimensions td {
 }
 
 /* - - - Footer - - - */
+
+/* Sticky footer */
 .footer {
     position: fixed;
     left: 0;
@@ -312,6 +314,22 @@ table.dimensions td {
     background-color: #e2e2e2;
     color: #000;
     text-align: center;
+}
+
+.footer-logo {
+    max-width: 60%;
+}
+
+footer .social-icons {
+    list-style: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.social-icons li {
+    display: inline;
+    font-size: 22px;
+    
 }
 
 .credits {
