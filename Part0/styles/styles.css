@@ -20,11 +20,15 @@ body {
     text-align: center;
     padding: 2em 0 2em 0;
     color: #333333;
-
 }
 
 /* - - - Links - - - */
 a {
+    color: var(--highlight-color);
+}
+
+a:hover {
+    text-decoration: none;
     color: var(--highlight-color);
 }
 
@@ -37,6 +41,51 @@ a {
     position: absolute;
     top: 0;
     left: 0;
+    padding: 0;
+}
+
+.topbar .nav {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 100%;
+}
+
+.topbar .nav li {
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.topbar a {
+    color: #000;
+}
+
+.topbar .nav li:last-of-type {
+    padding: 0 25px 0 15px;
+}
+
+.topbar a:hover {
+    color: var(--highlight-color)
+}
+
+/* Use specificity to style a list item differently */
+.topbar li#shopping-cart-link:hover {
+    background: #fff;
+}
+
+.topbar li#shopping-cart-link a:hover {
+    color: #000;
+}
+
+span.link-text {
+    margin-left: 5px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 100;
+    font-size: 0.9em;
 }
 
 .main-nav {
@@ -382,11 +431,6 @@ footer .social-icons {
 
 footer a {
     color: #363636;
-}
-
-footer a:hover {
-    text-decoration: none;
-    color: var(--highlight-color);
 }
 
 .credits {
