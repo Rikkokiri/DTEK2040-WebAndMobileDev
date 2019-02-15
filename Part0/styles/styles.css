@@ -75,11 +75,15 @@ a {
     color: var(--highlight-color);
 }
 
-/* - - - Title - - - */
+/* - - - Title, Price etc. - - - */
 
 h1 {
     font-size: 2.2em;
     text-transform: uppercase;
+}
+
+.price {
+    font-size: 1.2em;
 }
 
 /* - - - Form Elements - - - */
@@ -156,7 +160,8 @@ input[type="submit"] {
     margin-top: 15px;
 }
 
-.bundle-content, .bundle-content ul {
+.bundle-content,
+.bundle-content ul {
     margin-bottom: 0;
 }
 
@@ -223,7 +228,8 @@ table.dimensions td {
 }
 
 .product-wrapper {
-    position: relative; /* Allows full-image link */
+    position: relative;
+    /* Allows full-image link */
 }
 
 .product-wrapper:hover img {
@@ -237,7 +243,8 @@ table.dimensions td {
 .image-overlay {
     width: 100%;
     transition: .5s ease-out;
-    opacity: 0; /* CHANGE */
+    opacity: 0;
+    /* CHANGE */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -378,7 +385,7 @@ footer a {
 }
 
 footer a:hover {
-    text-decoration: none; 
+    text-decoration: none;
     color: var(--highlight-color);
 }
 

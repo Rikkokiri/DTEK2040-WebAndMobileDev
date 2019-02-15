@@ -1,5 +1,10 @@
 let color = 'black';
 let bundle = 'nobundle';
+const prices = {
+    nobundle: '$ 184.00',
+    travelbundle: '$ 229.00',
+    photobundle: '$ 264.00'
+}
 
 function addFormListeners() {
 
@@ -33,7 +38,8 @@ function addFormListeners() {
         }
 
         setProductImage()
-        displayBundleDetails();
+        displayBundleDetails()
+        setProductPrice()
     });
 
 }
@@ -41,6 +47,10 @@ function addFormListeners() {
 function setProductImage() {
     path = "img/prvke/" + bundle + "-" + color + ".jpg"
     $("#main-product-photo").attr('src', path);
+}
+
+function setProductPrice() {
+    $(".price").text(prices[bundle])
 }
 
 function displayBundleDetails() {
