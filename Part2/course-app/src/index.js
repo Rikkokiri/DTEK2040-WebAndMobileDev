@@ -2,31 +2,41 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Header = (props) => {
+const Course = ({ course }) => {
     return (
-        <h1>{props.course}</h1>
+        <div>
+            <Header name={course.name} />
+            <Contents parts={course.parts} />
+            <Total parts={course.parts} />
+        </div >
     )
 }
 
-const Contents = (props) => {
+const Header = ({ name }) => {
+    return (
+        <h1>{name}</h1>
+    )
+}
+
+const Contents = ({ parts }) => {
+    const listparts = () => parts.map(part => <Part key={part.id} part={part} />)
+
     return (
         <div>
-            <Part part={props.parts[0]} />
-            <Part part={props.parts[1]} />
-            <Part part={props.parts[2]} />
+            {listparts()}
         </div>
     )
 }
 
-const Part = (props) => {
+const Part = ({ part }) => {
     return (
-        <p>{props.part.name}: {props.part.exercises} exercises</p>
+        <p>{part.name}: {part.exercises} exercises</p>
     )
 }
 
-const Total = (props) => {
+const Total = ({ parts }) => {
     return (
-        <p>Total {props.parts.reduce((a, c) => { return a + c.exercises }, 0)} exercises</p>
+        <p>Total {parts.reduce((a, c) => { return a + c.exercises }, 0)} exercises</p>
     )
 }
 
@@ -36,24 +46,25 @@ const App = () => {
         parts: [
             {
                 name: 'Basics of React',
-                exercises: 8
+                exercises: 8,
+                id: 1
             },
             {
                 name: 'Using props',
-                exercises: 10
+                exercises: 10,
+                id: 2
             },
             {
                 name: 'Component states',
-                exercises: 12
+                exercises: 12,
+                id: 3
             }
         ]
     }
 
     return (
         <div>
-            <Header course={course.name} />
-            <Contents parts={course.parts} />
-            <Total parts={course.parts} />
+            <Course course={course} />
         </div>
     )
 }
