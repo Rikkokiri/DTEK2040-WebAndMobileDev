@@ -5,6 +5,7 @@ const Course = ({ course }) => {
     <div>
       <Header name={course.name} />
       <Contents parts={course.parts} />
+      <hr />
       <Total parts={course.parts} />
     </div >
   )
