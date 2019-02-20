@@ -1,0 +1,32 @@
+html {
+  font-size: 16px;
+  font-weight: 300;
+  background: linear-gradient(#DB2763 50%, #12EAEA);
+  min-height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  padding: 1em 2em;
+  font-family: 'Lato',
+    sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 1em;
+  font-size: 3em;
+  font-family: 'Bungee Outline',
+    cursive;
+  color: #12EAEA;
+  font-weight: 700;
+  text-shadow: 0px 0px 7px #12EAEA;
+}
+
+p {
+  color: #fff;
+  font-family: 'Bungee Hairline',
+    cursive;
+  font-size: 2em;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.9);
+}
