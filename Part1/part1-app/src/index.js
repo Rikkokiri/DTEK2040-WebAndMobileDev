@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 
 const Header = (props) => {
     return (
         <h1>{props.course}</h1>
+    )
+}
+
+const Contents = (props) => {
+    return (
+        <div>
+            <Part part={props.parts[0]} />
+            <Part part={props.parts[1]} />
+            <Part part={props.parts[2]} />
+        </div>
     )
 }
 
@@ -13,19 +24,9 @@ const Part = (props) => {
     )
 }
 
-const Contents = (props) => {
-    return (
-        <div>
-            <Part part={props.parts[0]}/>
-            <Part part={props.parts[1]} />
-            <Part part={props.parts[2]} />
-        </div>
-    )
-}
-
 const Total = (props) => {
     return (
-        <p>Total {props.parts.reduce((a, c) => {return a + c.exercises}, 0)} exercises</p>
+        <p>Total {props.parts.reduce((a, c) => { return a + c.exercises }, 0)} exercises</p>
     )
 }
 
@@ -34,8 +35,8 @@ const App = () => {
         name: 'Superadvanced web and mobile programming',
         parts: [
             {
-            name: 'Basics of React',
-            exercises: 8
+                name: 'Basics of React',
+                exercises: 8
             },
             {
                 name: 'Using props',
@@ -51,7 +52,7 @@ const App = () => {
     return (
         <div>
             <Header course={course.name} />
-            <Contents parts={course.parts}/>
+            <Contents parts={course.parts} />
             <Total parts={course.parts} />
         </div>
     )
