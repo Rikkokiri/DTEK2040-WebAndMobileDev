@@ -77,14 +77,6 @@ class App extends React.Component {
         })
     }
 
-    /*
-    voteHandler = (name, value) => {
-        this.setState({
-            [name]: +1,
-            sum: this.state.sum + [value]
-        })
-    }*/
-
     render() {
         return (
             <div className="AppContainer">
