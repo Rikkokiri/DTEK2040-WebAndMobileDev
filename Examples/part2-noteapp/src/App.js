@@ -11,7 +11,8 @@ class App extends React.Component {
     This is not the case in our application, so we can initialize the state using props. */
     this.state = {
       notes: props.notes,
-      newNote: ''
+      newNote: '',
+      showAll: true
     }
   }
 
@@ -40,12 +41,26 @@ class App extends React.Component {
     this.setState({ newNote: event.target.value })
   }
 
+  toggleVisible = () => {
+    this.setState({ showAll: !this.state.showAll })
+  }
+
   render() {
+    const notesToShow =
+      this.state.showAll ?
+        this.state.notes :
+        this.state.notes.filter(note => note.important === true)
+
+    const label = this.state.showAll ? 'only important' : 'all'
+
     return (
       <div>
         <h1>Notes</h1>
+        <div>
+          <button onClick={this.toggleVisible}>Show {label}</button>
+        </div>
         <ul>
-          {this.state.notes.map(note => <Note key={note.id} note={note} />)}
+          {notesToShow.map(note => <Note key={note.id} note={note} />)}
         </ul>
         <form onSubmit={this.addNote}>
           <input
