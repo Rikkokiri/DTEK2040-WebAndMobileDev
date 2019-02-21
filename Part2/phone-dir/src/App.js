@@ -1,28 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      persons: [
+        { name: 'Arto Hellas' }
+      ],
+      newName: ''
+    }
+  }
+
+  addNumber = (event) => {
+    event.preventDefault()
+    console.log('Button pressed!')
+
+    const nameObject = {
+      name: this.state.newName
+    }
+
+    const persons = this.state.persons.concat(nameObject)
+
+    this.setState({
+      persons: persons,
+      newName: ''
+    })
+  }
+
+  handleNameChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newName: event.target.value })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h2>Phone Directory</h2>
+        <form onSubmit={this.addNumber}>
+          <div>
+            Name: <input
+              value={this.state.newName}
+              onChange={this.handleNameChange}
+            />
+          </div>
+          <div>
+            <button type="submit">Add</button>
+          </div>
+        </form>
+        <h2>Numbers</h2>
+        <ul>
+          {this.state.persons.map(person => <li key={person.name}>{person.name}</li>)}
+        </ul>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
