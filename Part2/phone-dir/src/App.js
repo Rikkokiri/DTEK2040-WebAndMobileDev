@@ -14,17 +14,28 @@ class App extends React.Component {
   addNumber = (event) => {
     event.preventDefault()
     console.log('Button pressed!')
+    console.log(event.target)
 
-    const nameObject = {
-      name: this.state.newName
+    // If the directory already includes the name that user tries to add, prevent adding it.
+    if (this.state.persons.map(person => person.name).indexOf(this.state.newName) !== -1) {
+      alert("Name '" + this.state.newName + "' already exists in the phone directory and can't be added.")
+
+      this.setState({
+        newName: ''
+      })
     }
+    else {
+      const nameObject = {
+        name: this.state.newName
+      }
 
-    const persons = this.state.persons.concat(nameObject)
+      const persons = this.state.persons.concat(nameObject)
 
-    this.setState({
-      persons: persons,
-      newName: ''
-    })
+      this.setState({
+        persons: persons,
+        newName: ''
+      })
+    }
   }
 
   handleNameChange = (event) => {
