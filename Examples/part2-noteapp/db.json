@@ -57,7 +57,7 @@
     {
       "content": "",
       "date": "2019-03-01T18:18:21.770Z",
-      "important": false,
+      "important": true,
       "id": 10
     },
     {
@@ -69,7 +69,7 @@
     {
       "content": "Tämä on todella pitkä muistiinpano, jolla haluan testata, mitä tapahtuu jos muistiinpano ja sen lopussa oleva nappula eivät mahdu enää samalle riville.",
       "date": "2019-03-01T18:36:45.389Z",
-      "important": false,
+      "important": true,
       "id": 12
     }
   ]

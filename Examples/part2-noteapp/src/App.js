@@ -1,5 +1,6 @@
 import React from 'react';
 import Note from './components/Note'
+import Notication from './components/Notification'
 import noteService from './services/notes'
 
 class App extends React.Component {
@@ -13,7 +14,8 @@ class App extends React.Component {
     this.state = {
       notes: [],
       newNote: '',
-      showAll: true
+      showAll: true,
+      error: null
     }
     console.log('constructor')
   }
@@ -23,6 +25,7 @@ class App extends React.Component {
     noteService
       .getAll()
       .then(response => {
+
         console.log('Promise fulfilled')
         this.setState({ notes: response })
       })
@@ -79,8 +82,14 @@ class App extends React.Component {
           The modified note returned by the server is then added to the state. */
         })
         .catch(error => {
-          alert(`Unfortunately note '${note.content}' has  already been removed from the server.`)
-          this.setState({ notes: this.state.notes.filter(n => n.id !== id) })
+          // alert(`Unfortunately note '${note.content}' has  already been removed from the server.`)
+          this.setState({
+            error: `Unfortunately note '${note.content}' has  already been removed from the server.`,
+            notes: this.state.notes.filter(n => n.id !== id)
+          })
+          setTimeout(() => {
+            this.setState({ error: null })
+          }, 5000)
         })
     }
   }
@@ -106,6 +115,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Notes</h1>
+
+        <Notication message={this.state.error} />
         <div>
           <button onClick={this.toggleVisible}>Show {label}</button>
         </div>

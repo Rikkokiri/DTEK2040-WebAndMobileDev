@@ -69,3 +69,17 @@ form input {
 form button {
   margin-top: 0.75em;
 }
+
+/* - - - Error message - - - */
+
+.error {
+  margin: 0 auto 20px auto;
+  width: 80%;
+  color: #000;
+  background: yellow;
+  font-size: 2em;
+  font-family: 'Permanent Marker',
+    sans-serif;
+  border: solid 5px #000;
+  padding: 10px;
+}
