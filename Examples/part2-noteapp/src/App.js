@@ -1,6 +1,6 @@
 import React from 'react';
 import Note from './components/Note'
-import axios from 'axios'
+import noteService from './services/notes'
 
 class App extends React.Component {
   constructor(props) {
@@ -20,11 +20,11 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log('Did mount')
-    axios
-      .get('http://localhost:3001/notes')
+    noteService
+      .getAll()
       .then(response => {
         console.log('Promise fulfilled')
-        this.setState({ notes: response.data })
+        this.setState({ notes: response })
       })
   }
 
@@ -38,11 +38,11 @@ class App extends React.Component {
       // id: this.state.notes.length + 1
     }
 
-    axios
-      .post('http://localhost:3001/notes', noteObject)
-      .then(response => {
+    noteService
+      .create(noteObject)
+      .then(newNote => {
         this.setState({
-          notes: this.state.notes.concat(response.data),
+          notes: this.state.notes.concat(newNote),
           newNote: ''
         })
       })
@@ -59,8 +59,6 @@ class App extends React.Component {
       // Use ES6's template string feature to write the string:
       console.log(`importance of ${id} needs to be toggled`)
 
-      const url = `http://localhost:3001/notes/${id}`
-
       // The array method find is used to find the note that will be changed
       // and a reference to the note is stored in the variable note.
       const note = this.state.notes.find(n => n.id === id)
@@ -70,14 +68,19 @@ class App extends React.Component {
       // const changedNote = Object.assign({}, note, {important: !note.important} }
 
       // A new note is sent to the server using a PUT request and thus it replaces the earlier note
-      axios
-        .put(url, changedNote)
-        .then(response => {
+      noteService
+        .update(id, changedNote)
+        .then(changedNote => {
+          const notes = this.state.notes.filter(n => n.id !== id)
           this.setState({
-            notes: this.state.notes.map(note => note.id !== id ? note : response.data)
+            notes: notes.concat(changedNote)
           })
           /* In the callback function, all other notes except the modified one are stored in the App component's state.
           The modified note returned by the server is then added to the state. */
+        })
+        .catch(error => {
+          alert(`Unfortunately note '${note.content}' has  already been removed from the server.`)
+          this.setState({ notes: this.state.notes.filter(n => n.id !== id) })
         })
     }
   }
