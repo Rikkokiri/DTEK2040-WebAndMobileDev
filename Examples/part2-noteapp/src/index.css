@@ -1,14 +1,71 @@
-body {
+html {
+  min-width: 100%;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  margin: 20px auto;
+  width: 90%;
+  min-height: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Gloria Hallelujah', serif;
+
+  background: repeating-linear-gradient(0deg,
+    lightyellow,
+    lightyellow 36px,
+    #333 36px,
+    #333 37px);
+}
+
+h1 {
+  font-family: 'Permanent Marker', sans-serif;
+  text-align: center;
+  font-size: 4em;
+  padding: 0;
+  margin: 0.2em 0;
+}
+
+button {
+  background: #fff;
+  font-family: 'Permanent Marker', sans-serif;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+ul {
+  text-align: left;
+  padding-bottom: 25px;
+}
+
+li {
+  min-width: 100%;
+  padding: 3px;
+}
+
+li button {
+  float: right;
+  padding: 5px 10px;
+  font-size: 0.8em;
+}
+
+/* - - - Form - - - */
+
+form input {
+  display: block;
+  margin: 0 auto;
+  padding: 5px 10px;
+  width: 70%;
+  background: lightgray;
+  border: none;
+  height: 26px;
+  border-bottom: 2px solid black;
+}
+
+form button {
+  margin-top: 0.75em;
 }
