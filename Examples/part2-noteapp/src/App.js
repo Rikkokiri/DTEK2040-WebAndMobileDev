@@ -52,6 +52,36 @@ class App extends React.Component {
     This is important, because the state should never be mutated directly in React! */
   }
 
+  /* This method toggleImportanceOf is not an event handler itself.
+  Instead, it is a factory that creates an event handler for each note. */
+  toggleImportanceOf = (id) => {
+    return () => {
+      // Use ES6's template string feature to write the string:
+      console.log(`importance of ${id} needs to be toggled`)
+
+      const url = `http://localhost:3001/notes/${id}`
+
+      // The array method find is used to find the note that will be changed
+      // and a reference to the note is stored in the variable note.
+      const note = this.state.notes.find(n => n.id === id)
+      const changedNote = { ...note, important: !note.important } // Applying the object spread operation
+
+      // We could have created the new object using an older command Object.assign
+      // const changedNote = Object.assign({}, note, {important: !note.important} }
+
+      // A new note is sent to the server using a PUT request and thus it replaces the earlier note
+      axios
+        .put(url, changedNote)
+        .then(response => {
+          this.setState({
+            notes: this.state.notes.map(note => note.id !== id ? note : response.data)
+          })
+          /* In the callback function, all other notes except the modified one are stored in the App component's state.
+          The modified note returned by the server is then added to the state. */
+        })
+    }
+  }
+
   handleNoteChange = (event) => {
     console.log(event.target.value)
     this.setState({ newNote: event.target.value })
@@ -77,7 +107,13 @@ class App extends React.Component {
           <button onClick={this.toggleVisible}>Show {label}</button>
         </div>
         <ul>
-          {notesToShow.map(note => <Note key={note.id} note={note} />)}
+          {notesToShow.map(note =>
+            <Note
+              key={note.id}
+              note={note}
+              toggleImportance={this.toggleImportanceOf(note.id)}
+            />
+          )}
         </ul>
         <form onSubmit={this.addNote}>
           <input

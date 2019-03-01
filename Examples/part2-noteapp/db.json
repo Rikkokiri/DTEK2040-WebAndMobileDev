@@ -4,7 +4,7 @@
       "id": 1,
       "content": "HTML on helppoa",
       "date": "2017-12-10T17:30:31.098Z",
-      "important": true
+      "important": false
     },
     {
       "id": 2,
@@ -27,13 +27,13 @@
     {
       "content": "RESTful-apissa uuden resurssin luominen tapahtuu metodilla POST, urlina on resurssikokoelman juuri",
       "date": "2019-03-01T13:29:33.606Z",
-      "important": true,
+      "important": false,
       "id": 5
     },
     {
       "content": "SASS on paras!",
       "date": "2019-03-01T13:33:00.566Z",
-      "important": true,
+      "important": false,
       "id": 6
     },
     {
@@ -45,7 +45,7 @@
     {
       "content": "Haluan kirjoittaa vielä jotain.",
       "date": "2019-03-01T13:35:31.627Z",
-      "important": true,
+      "important": false,
       "id": 8
     }
   ]
