@@ -1,5 +1,6 @@
 import React from 'react';
 import Note from './components/Note'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,10 +11,21 @@ class App extends React.Component {
     we can see that this problem will usually arise if the value of the props can change.
     This is not the case in our application, so we can initialize the state using props. */
     this.state = {
-      notes: props.notes,
+      notes: [],
       newNote: '',
       showAll: true
     }
+    console.log('constructor')
+  }
+
+  componentDidMount() {
+    console.log('Did mount')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('Promise fulfilled')
+        this.setState({ notes: response.data })
+      })
   }
 
   addNote = (event) => {
@@ -46,6 +58,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('render')
     const notesToShow =
       this.state.showAll ?
         this.state.notes :
