@@ -1,5 +1,6 @@
 {
-  "notes": [{
+  "notes": [
+    {
       "id": 1,
       "content": "HTML on helppoa",
       "date": "2017-12-10T17:30:31.098Z",
@@ -22,6 +23,30 @@
       "content": "CSS on myös helppoa",
       "date": "2018-12-10T19:23:24.128Z",
       "important": false
+    },
+    {
+      "content": "RESTful-apissa uuden resurssin luominen tapahtuu metodilla POST, urlina on resurssikokoelman juuri",
+      "date": "2019-03-01T13:29:33.606Z",
+      "important": true,
+      "id": 5
+    },
+    {
+      "content": "SASS on paras!",
+      "date": "2019-03-01T13:33:00.566Z",
+      "important": true,
+      "id": 6
+    },
+    {
+      "content": "SCSS on helpompaa kirjoittaa kuin SASS, koska sen syntaksi muistuttaa enemmän CSS:ä.",
+      "date": "2019-03-01T13:33:32.924Z",
+      "important": false,
+      "id": 7
+    },
+    {
+      "content": "Haluan kirjoittaa vielä jotain.",
+      "date": "2019-03-01T13:35:31.627Z",
+      "important": true,
+      "id": 8
     }
   ]
 }

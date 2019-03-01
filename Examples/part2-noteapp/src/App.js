@@ -33,19 +33,23 @@ class App extends React.Component {
     const noteObject = {
       content: this.state.newNote,
       date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-      id: this.state.notes.length + 1
+      important: Math.random() > 0.5
+      // The task of generating an id is left to the server
+      // id: this.state.notes.length + 1
     }
+
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(response => {
+        this.setState({
+          notes: this.state.notes.concat(response.data),
+          newNote: ''
+        })
+      })
 
     /* The method concat does not change the original array this.state.notes.
     Instead, it creates a new array, which includes the new element along with the old ones.
     This is important, because the state should never be mutated directly in React! */
-    const notes = this.state.notes.concat(noteObject)
-
-    this.setState({
-      notes: notes,
-      newNote: ''
-    })
   }
 
   handleNoteChange = (event) => {
