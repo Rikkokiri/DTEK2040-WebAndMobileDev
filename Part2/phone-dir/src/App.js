@@ -55,6 +55,27 @@ class App extends React.Component {
     }
   }
 
+  /* This method deleteNumber is not an event handler itself.
+  Instead, it is a factory that creates an event handler for each number entry. */
+  deleteEntry = (name) => {
+    return () => {
+      console.log(`Entry ${name} needs to be deleted`)
+
+      if (window.confirm(`Do you want to delete entry for ${name}?`)) {
+        const entryToDelete = this.state.persons.find(p => p.name === name)
+
+        NumbersService
+          .remove(entryToDelete.id)
+          .then(response => {
+            const persons = this.state.persons.filter(p => p.id !== entryToDelete.id)
+            this.setState({
+              persons: persons
+            })
+          })
+      }
+    }
+  }
+
   handleNameChange = (event) => {
     console.log(event.target.value)
     this.setState({ newName: event.target.value })
@@ -83,7 +104,8 @@ class App extends React.Component {
               <DirEntry
                 key={person.name}
                 name={person.name}
-                number={person.number} />
+                number={person.number}
+                deleteEntry={this.deleteEntry(person.name)} />
             )}
           </tbody>
         </table>

@@ -10,7 +10,12 @@ const create = (newEntry) => {
   return axios.post(baseURL, newEntry).then(response => response.data)
 }
 
+const remove = (id) => {
+  return axios.delete(`${baseURL}/${id}`).then(response => response.data)
+}
+
 export default {
   getAll,
-  create
+  create,
+  remove
 }
