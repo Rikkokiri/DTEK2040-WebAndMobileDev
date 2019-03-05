@@ -1,4 +1,6 @@
 import React from 'react';
+import DirEntry from './components/DirEntry'
+import NumberForm from './components/NumberForm'
 
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +19,6 @@ class App extends React.Component {
 
   addNumber = (event) => {
     event.preventDefault()
-    console.log('Button pressed!')
-    console.log(event.target)
 
     // If the directory already includes the name that user tries to add, prevent adding it.
     if (this.state.persons.map(person => person.name).indexOf(this.state.newName) !== -1) {
@@ -58,27 +58,22 @@ class App extends React.Component {
     return (
       <div>
         <h2>Phone Directory</h2>
-        <form onSubmit={this.addNumber}>
-          <div>
-            Name: <input
-              value={this.state.newName}
-              onChange={this.handleNameChange}
-            />
-          </div>
-          <div>
-            Number: <input
-              value={this.state.newNumber}
-              onChange={this.handleNumberChange}
-            />
-          </div>
-          <div>
-            <button type="submit">Add</button>
-          </div>
-        </form>
+        <NumberForm
+          newName={this.state.newName}
+          newNumber={this.state.newNumber}
+          addNumber={this.addNumber}
+          handleNameChange={this.handleNameChange}
+          handleNumberChange={this.handleNumberChange}
+        />
         <h2>Numbers</h2>
         <table>
           <tbody>
-            {this.state.persons.map(person => <tr key={person.name}><td>{person.name}</td><td>{person.number}</td></tr>)}
+            {this.state.persons.map(person =>
+              <DirEntry
+                key={person.name}
+                name={person.name}
+                number={person.number} />
+            )}
           </tbody>
         </table>
       </div>
