@@ -1,4 +1,20 @@
-const http = require('http')
+// const http = require('http')
+
+/*
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' })
+  res.end(JSON.stringify(notes))
+})
+
+const port = 3001
+app.listen(port)
+console.log(`Server running on port ${port}`)
+*/
+
+// ------------- Easier way with Express -------------
+
+const express = require('express')
+const app = express()
 
 let notes = [
   {
@@ -21,11 +37,15 @@ let notes = [
   }
 ]
 
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify(notes))
+app.get('/', (req, res) => {
+  res.send('<h1>Hello World</h1>')
 })
 
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+app.get('/notes', (req, res) => {
+  res.json(notes)
+})
+
+const PORT = 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
