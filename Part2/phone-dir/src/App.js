@@ -2,19 +2,28 @@ import React from 'react';
 import DirEntry from './components/DirEntry'
 import NumberForm from './components/NumberForm'
 
+import axios from 'axios'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        {
-          name: 'Arto Hellas',
-          number: '040-123456'
-        }
-      ],
+      persons: [],
       newName: '',
       newNumber: ''
     }
+  }
+
+  componentDidMount() {
+    console.log('Did mount')
+
+    axios.get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('Promise fulfilled')
+        this.setState({
+          persons: response.data
+        })
+      })
   }
 
   addNumber = (event) => {

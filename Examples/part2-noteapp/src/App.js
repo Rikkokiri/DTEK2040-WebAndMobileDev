@@ -27,7 +27,9 @@ class App extends React.Component {
       .then(response => {
 
         console.log('Promise fulfilled')
-        this.setState({ notes: response })
+        this.setState({
+          notes: response
+        })
       })
   }
 
@@ -65,7 +67,10 @@ class App extends React.Component {
       // The array method find is used to find the note that will be changed
       // and a reference to the note is stored in the variable note.
       const note = this.state.notes.find(n => n.id === id)
-      const changedNote = { ...note, important: !note.important } // Applying the object spread operation
+      const changedNote = {
+        ...note,
+        important: !note.important
+      } // Applying the object spread operation
 
       // We could have created the new object using an older command Object.assign
       // const changedNote = Object.assign({}, note, {important: !note.important} }
@@ -88,7 +93,9 @@ class App extends React.Component {
             notes: this.state.notes.filter(n => n.id !== id)
           })
           setTimeout(() => {
-            this.setState({ error: null })
+            this.setState({
+              error: null
+            })
           }, 5000)
         })
     }
@@ -96,47 +103,74 @@ class App extends React.Component {
 
   handleNoteChange = (event) => {
     console.log(event.target.value)
-    this.setState({ newNote: event.target.value })
+    this.setState({
+      newNote: event.target.value
+    })
   }
 
   toggleVisible = () => {
-    this.setState({ showAll: !this.state.showAll })
+    this.setState({
+      showAll: !this.state.showAll
+    })
   }
 
   render() {
     console.log('render')
     const notesToShow =
       this.state.showAll ?
-        this.state.notes :
-        this.state.notes.filter(note => note.important === true)
+      this.state.notes :
+      this.state.notes.filter(note => note.important === true)
 
     const label = this.state.showAll ? 'only important' : 'all'
 
-    return (
-      <div>
-        <h1>Notes</h1>
+    return ( <
+      div >
+      <
+      h1 > Notes < /h1>
 
-        <Notication message={this.state.error} />
-        <div>
-          <button onClick={this.toggleVisible}>Show {label}</button>
-        </div>
-        <ul>
-          {notesToShow.map(note =>
-            <Note
-              key={note.id}
-              note={note}
-              toggleImportance={this.toggleImportanceOf(note.id)}
-            />
-          )}
-        </ul>
-        <form onSubmit={this.addNote}>
-          <input
-            value={this.state.newNote}
-            onChange={this.handleNoteChange}
+      <
+      Notication message = {
+        this.state.error
+      }
+      /> <
+      div >
+      <
+      button onClick = {
+        this.toggleVisible
+      } > Show {
+        label
+      } < /button> <
+      /div> <
+      ul > {
+        notesToShow.map(note =>
+          <
+          Note key = {
+            note.id
+          }
+          note = {
+            note
+          }
+          toggleImportance = {
+            this.toggleImportanceOf(note.id)
+          }
           />
-          <button type="submit">Save note</button>
-        </form>
-      </div >
+        )
+      } <
+      /ul> <
+      form onSubmit = {
+        this.addNote
+      } >
+      <
+      input value = {
+        this.state.newNote
+      }
+      onChange = {
+        this.handleNoteChange
+      }
+      /> <
+      button type = "submit" > Save note < /button> <
+      /form> <
+      /div >
     )
   }
 }
