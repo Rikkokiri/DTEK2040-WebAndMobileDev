@@ -1,8 +1,7 @@
 import React from 'react';
 import DirEntry from './components/DirEntry'
 import NumberForm from './components/NumberForm'
-
-import axios from 'axios'
+import NumbersService from './services/numbers'
 
 class App extends React.Component {
   constructor(props) {
@@ -17,11 +16,12 @@ class App extends React.Component {
   componentDidMount() {
     console.log('Did mount')
 
-    axios.get('http://localhost:3001/persons')
+    NumbersService
+      .getAll()
       .then(response => {
         console.log('Promise fulfilled')
         this.setState({
-          persons: response.data
+          persons: response
         })
       })
   }
@@ -38,18 +38,20 @@ class App extends React.Component {
       })
     }
     else {
-      const nameObject = {
+      const entryObject = {
         name: this.state.newName,
         number: this.state.newNumber
       }
 
-      const persons = this.state.persons.concat(nameObject)
-
-      this.setState({
-        persons: persons,
-        newName: '',
-        newNumber: ''
-      })
+      NumbersService
+        .create(entryObject)
+        .then(newEntry => {
+          this.setState({
+            persons: this.state.persons.concat(newEntry),
+            newName: '',
+            newNumber: ''
+          })
+        })
     }
   }
 
