@@ -16,7 +16,9 @@ console.log(`Server running on port ${port}`)
 const express = require('express')
 const app = express() /* By calling the function express, we assign an object
                          representing an Express application to the variable app */
+const bodyParser = require('body-parser')
 
+app.use(bodyParser.json())
 
 let notes = [
   {
@@ -62,6 +64,32 @@ app.delete('/notes/:id', (req, res) => {
   const id = Number(req.params.id)
   notes = notes.filter(note => note.id !== id)
   res.status(204).end()
+})
+
+const generateId = () => {
+  const maxId = notes.length > 0 ? notes.map(n => n.id).sort((a, b) => a - b).reverse()[0] : 1
+  return maxId + 1
+}
+
+app.post('/notes', (req, res) => {
+  const body = req.body
+
+  if (body.content === undefined) {
+    /* Note that the command return is important here. Otherwise the execution would continue until the end of the method
+    and an erroneous note would be saved in the database! */
+    return res.status(400).json({ error: 'content missing' })
+  }
+
+  const note = {
+    content: body.content,
+    important: body.important || false,
+    data: new Date(), // Timestamp should be created on the server side because client's computer cannot be trusted
+    id: generateId()
+  }
+
+  notes = notes.concat(note)
+
+  res.json(note)
 })
 
 const PORT = 3001
