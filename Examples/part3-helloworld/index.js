@@ -16,9 +16,39 @@ console.log(`Server running on port ${port}`)
 const express = require('express')
 const app = express() /* By calling the function express, we assign an object
                          representing an Express application to the variable app */
-const bodyParser = require('body-parser')
 
+// --------------- Middleware -----------------
+/*
+- In Express, middleware functions are functions that have access to request and response objects.
+- body-parser, for example, takes the raw data from a request object, parses it into a JavaScript object
+  and places the object into the body property of request
+- An app can use several pieces of middleware, in which case they are executed successively in the order
+  they have been taken into use in the code.
+*/
+
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
+
+const cors = require('cors')
+app.use(cors())
+
+/* Let us implement a simple middleware function
+that prints some basic information about the arriving requests to the console. */
+const logger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+
+  // At the end, middleware calls the function next received as a parameter.
+  // This function is used to transfer the control to the next middleware function.
+  next()
+}
+
+// Middleware can be taken into use as follows:
+app.use(logger)
+
+// ------ Data -------------
 
 let notes = [
   {
@@ -40,6 +70,8 @@ let notes = [
     important: true
   }
 ]
+
+// -------------- Routes --------------
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello World</h1>')
@@ -93,25 +125,12 @@ app.post('/notes', (req, res) => {
   res.json(note)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-// --------------------------------
-
-/* Let us implement a simple middleware function
-that prints some basic information about the arriving requests to the console. */
-const logger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
-
-// Middleware can be taken into use as follows:
-app.use(logger)
+// ------- More middleware --------
 
 const error = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
