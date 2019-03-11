@@ -32,6 +32,8 @@ app.use(bodyParser.json())
 const cors = require('cors')
 app.use(cors())
 
+app.use(express.static('build'))
+
 /* Let us implement a simple middleware function
 that prints some basic information about the arriving requests to the console. */
 const logger = (request, response, next) => {
