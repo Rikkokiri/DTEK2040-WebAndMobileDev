@@ -74,7 +74,7 @@ let notes = [
 // -------------- Routes --------------
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World</h1>')
+  res.send('<h1>Note app backend</h1>')
 })
 
 app.get('/notes', (req, res) => {
