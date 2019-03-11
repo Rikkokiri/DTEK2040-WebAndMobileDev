@@ -4,13 +4,13 @@ const NumberForm = ({ newName, newNumber, addNumber, handleNameChange, handleNum
   return (
     <form onSubmit={addNumber}>
       <div>
-        Name: <input
+        Name <br /><input
           value={newName}
           onChange={handleNameChange}
         />
       </div>
       <div>
-        Number: <input
+        Number <br /><input
           value={newNumber}
           onChange={handleNumberChange}
         />

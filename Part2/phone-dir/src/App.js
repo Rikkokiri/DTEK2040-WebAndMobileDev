@@ -92,7 +92,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Phone Directory</h2>
+        <h1>Phone Directory</h1>
         <NumberForm
           newName={this.state.newName}
           newNumber={this.state.newNumber}
