@@ -37,6 +37,9 @@ class App extends React.Component {
         newName: ''
       })
     }
+    else if (this.state.newName === '' || this.state.newNumber === '') {
+      alert("Both fields need to be filled.")
+    }
     else {
       const entryObject = {
         name: this.state.newName,
