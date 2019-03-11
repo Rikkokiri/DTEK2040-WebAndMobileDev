@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = '/notes'
+const baseURL = '/api/notes'
 
 const getAll = () => {
   return axios.get(baseURL).then(response => response.data)
