@@ -63,6 +63,7 @@ app.get('/notes/:id', (req, res) => {
 app.delete('/notes/:id', (req, res) => {
   const id = Number(req.params.id)
   notes = notes.filter(note => note.id !== id)
+  res
   res.status(204).end()
 })
 
@@ -96,3 +97,24 @@ const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+// --------------------------------
+
+/* Let us implement a simple middleware function
+that prints some basic information about the arriving requests to the console. */
+const logger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
+
+// Middleware can be taken into use as follows:
+app.use(logger)
+
+const error = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(error)
