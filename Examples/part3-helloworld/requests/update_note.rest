@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/notes/5c8a9d202a4b090fac792715
+Content-Type: application/json
+
+{
+  "content": "HTML on helppoa",
+  "important":true
+}
