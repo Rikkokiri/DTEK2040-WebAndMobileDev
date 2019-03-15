@@ -25,8 +25,8 @@ class App extends React.Component {
     noteService
       .getAll()
       .then(response => {
-
         console.log('Promise fulfilled')
+        console.log(response)
         this.setState({ notes: response })
       })
   }

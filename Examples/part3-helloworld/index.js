@@ -94,9 +94,8 @@ app.get('/api/', (request, response) => {
 app.get('/api/notes', (request, response) => {
   Note
     .find({}, { __v: 0 })
-    .then(notes.map(formatNote))
-    .then(formattedNotes => {
-      response.json(formattedNotes)
+    .then(notes => {
+      response.json(notes.map(formatNote))
     })
 })
 
@@ -127,10 +126,11 @@ app.delete('/api/notes/:id', (request, response) => {
     })
 })
 
+/*
 const generateId = () => {
   const maxId = notes.length > 0 ? notes.map(n => n.id).sort((a, b) => a - b).reverse()[0] : 1
   return maxId + 1
-}
+}*/
 
 app.post('/api/notes', (request, response) => {
   const body = request.body
@@ -165,9 +165,8 @@ app.put('/api/notes/:id', (request, response) => {
 
   Note
     .findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(formatNote)
-    .then(updatedAndFormattedNote => {
-      response.json(updatedAndFormattedNote)
+    .then(updatedNote => {
+      response.json(formatNote(updatedNote))
     })
     .catch(error => {
       console.log(error)
