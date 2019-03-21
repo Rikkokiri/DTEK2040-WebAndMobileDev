@@ -15,5 +15,6 @@ Assignments for course DTEK2040 Web and Mobile Programming (5 ECTS)
 ## Part 2.
 
 ## Part 3.
+[Part 3](http://users.utu.fi/sjprau/web2019/exercises.html#osa-3) was dedicated to building a Node.js backend for the phone directory app developed in part 2. Code for that part is in [a separate repository](https://github.com/Rikkokiri/DTEK2040-Part3/) and both the front and backend have been deployed to [Heroku](https://dtek2040-phonedir.herokuapp.com/).
 
 ## Part 4.
