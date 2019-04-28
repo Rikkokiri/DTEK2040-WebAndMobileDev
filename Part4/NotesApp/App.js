@@ -1,6 +1,46 @@
 import React from 'react';
-import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput } from 'react-native';
+import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput, AsyncStorage } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+
+class NotesList extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      loading: true,
+      error: false,
+      notes: [
+      ],
+      newNote: ''
+    };
+  }
+
+  static navigationOptions = {
+    title: 'Notes'
+  }
+
+  listnotes = ({ id, content }) => {
+    return (
+      <Text key={id}>{content}</Text>
+    )
+  }
+
+  render() {
+    const { navigate } = this.props.navigation;
+
+    return (
+      <ScrollView>
+        <View>
+          <Button title="Create New Note"
+            onPress={() => navigate('NewNote', { name: 'NewNote' })} />
+        </View>
+        <View style={styles.notesContainer}>
+          {this.state.notes.map(this.listnotes)}
+        </View>
+      </ScrollView>
+    )
+  }
+}
 
 class NewNoteScreen extends React.Component {
   constructor(props) {
@@ -85,52 +125,6 @@ class NewNoteScreen extends React.Component {
     )
   }
 
-}
-
-class NotesList extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      notes: [
-        {
-          id: 1,
-          content: "Note 1"
-        },
-        {
-          id: 2,
-          content: "Note 2"
-        },
-      ],
-      newNote: ''
-    };
-  }
-
-  static navigationOptions = {
-    title: 'Notes'
-  }
-
-  listnotes = ({ id, content }) => {
-    return (
-      <Text key={id}>{content}</Text>
-    )
-  }
-
-  render() {
-    const { navigate } = this.props.navigation;
-
-    return (
-      <ScrollView>
-        <View>
-          <Button title="Create New Note"
-            onPress={() => navigate('NewNote', { name: 'NewNote' })} />
-        </View>
-        <View style={styles.notesContainer}>
-          {this.state.notes.map(this.listnotes)}
-        </View>
-      </ScrollView>
-    )
-  }
 }
 
 const AppNavigator = createStackNavigator(
