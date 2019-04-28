@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput } from 'react-native';
+import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class NotesList extends React.Component {
@@ -7,85 +7,89 @@ class NotesList extends React.Component {
     super(props)
 
     this.state = {
-      notes: [],
+      notes: [
+        {
+          id: 1,
+          content: "Note 1"
+        },
+        {
+          id: 2,
+          content: "Note 2"
+        },
+      ],
       newNote: ''
     };
   }
 
+  listnotes = ({ id, content }) => {
+    return (
+      <Text key={id}>{content}</Text>
+    )
+  }
+
+  showAlert = (title, message) => {
+    Alert.alert(
+      title,
+      message,
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: false },
+    );
+  }
+
+  addNote = () => {
+    console.log(this.state.newNote)
+
+    // TODO: Check for an empty submission
+    if (this.state.newNote === '') {
+      this.showAlert('Empty Note', "An empty note cannot be added.");
+    }
+    // Check for duplicates
+    else if (this.state.notes.map(note => note.content).indexOf(this.state.newNote) !== -1) {
+
+      // Show an alert
+      console.log("This note already exists");
+
+      this.showAlert('Duplicate Note', "Identical note already exists and cannot be added");
+
+      this.setState({
+        newNote: ''
+      })
+    }
+    else {
+
+      const noteObject = {
+        id: this.state.notes.length + 1,
+        content: this.state.newNote
+      }
+
+      const notes = this.state.notes.concat(noteObject)
+
+      this.setState({
+        notes: notes,
+        newNote: ''
+      })
+    }
+  }
+
   render() {
     return (
-      <View>
-        <ScrollView>
-          <Text>"Note 1"</Text>
-          <Text>"Note 2"</Text>
-          <Text>"Note 3"</Text>
-          <Text>"Note 4"</Text>
-          <Text>"Note 5"</Text>
-          <Text>"Note 6"</Text>
-          <Text>"Note 7"</Text>
-          <Text>"Note 8"</Text>
-          <Text>"Note 9"</Text>
-          <Text>"Note 10"</Text>
-          <Text>"Note 11"</Text>
-          <Text>"Note 12"</Text>
-          <Text>"Note 13"</Text>
-          <Text>"Note 14"</Text>
-          <Text>"Note 15"</Text>
-          <Text>"Note 16"</Text>
-          <Text>"Note LOL"</Text>
-          <Text>"Note 2"</Text>
-          <Text>"Note 3"</Text>
-          <Text>"Note 4"</Text>
-          <Text>"Note 5"</Text>
-          <Text>"Note 6"</Text>
-          <Text>"Note 7"</Text>
-          <Text>"Note 8"</Text>
-          <Text>"Note 9"</Text>
-          <Text>"Note 10"</Text>
-          <Text>"Note 11"</Text>
-          <Text>"Note 12"</Text>
-          <Text>"Note 13"</Text>
-          <Text>"Note 14"</Text>
-          <Text>"Note 15"</Text>
-          <Text>"Note 16"</Text>
-          <Text>"Note YEET"</Text>
-          <Text>"Note 2"</Text>
-          <Text>"Note 3"</Text>
-          <Text>"Note 4"</Text>
-          <Text>"Note 5"</Text>
-          <Text>"Note 6"</Text>
-          <Text>"Note 7"</Text>
-          <Text>"Note 8"</Text>
-          <Text>"Note 9"</Text>
-          <Text>"Note 10"</Text>
-          <Text>"Note 11"</Text>
-          <Text>"Note 12"</Text>
-          <Text>"Note 13"</Text>
-          <Text>"Note 14"</Text>
-          <Text>"Note 15"</Text>
-          <Text>"Note 16"</Text>
-
-          <View>
-            <TextInput
-              onChangeText={(newNote) => this.setState({ newNote })}
-              multiline={true}
-              value={this.state.newNote}
-              placeholder="Write the note here"
-            />
-            <Button onPress={() => {
-              console.log(this.state.newNote)
-
-              const notes = this.state.notes.concat(this.state.newNote)
-
-              this.setState({
-                notes: notes,
-                newNote: ''
-              })
-            }} title="ADD NOTE" />
-          </View>
-        </ScrollView>
-
-      </View>
+      <ScrollView>
+        <View style={styles.notesContainer}>
+          <Text style={styles.notesTitle}>NOTES</Text>
+          {this.state.notes.map(this.listnotes)}
+        </View>
+        <View>
+          <TextInput
+            onChangeText={(newNote) => this.setState({ newNote })}
+            multiline={true}
+            value={this.state.newNote}
+            placeholder="Write the note here"
+          />
+          <Button onPress={this.addNote} title="ADD NOTE" />
+        </View>
+      </ScrollView>
     )
   }
 }
@@ -108,12 +112,17 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  notesContainer: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
-    padding: 30
+    alignItems: 'center',
+    paddingTop: 40
     //alignItems: 'center'
     //justifyContent: 'center',
+  },
+  notesTitle: {
+    color: 'blue'
   },
   notes: {
     color: 'red'
