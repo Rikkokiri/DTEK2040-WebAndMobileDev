@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-class NotesList extends React.Component {
+class NewNoteScreen extends React.Component {
   constructor(props) {
     super(props)
 
@@ -18,13 +18,11 @@ class NotesList extends React.Component {
         },
       ],
       newNote: ''
-    };
+    }
   }
 
-  listnotes = ({ id, content }) => {
-    return (
-      <Text key={id}>{content}</Text>
-    )
+  static navigationOptions = {
+    title: 'Create New Note'
   }
 
   showAlert = (title, message) => {
@@ -75,19 +73,60 @@ class NotesList extends React.Component {
 
   render() {
     return (
+      <View>
+        <TextInput
+          onChangeText={(newNote) => this.setState({ newNote })}
+          multiline={true}
+          value={this.state.newNote}
+          placeholder="Write the note here"
+        />
+        <Button onPress={this.addNote} title="ADD NOTE" />
+      </View>
+    )
+  }
+
+}
+
+class NotesList extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      notes: [
+        {
+          id: 1,
+          content: "Note 1"
+        },
+        {
+          id: 2,
+          content: "Note 2"
+        },
+      ],
+      newNote: ''
+    };
+  }
+
+  static navigationOptions = {
+    title: 'Notes'
+  }
+
+  listnotes = ({ id, content }) => {
+    return (
+      <Text key={id}>{content}</Text>
+    )
+  }
+
+  render() {
+    const { navigate } = this.props.navigation;
+
+    return (
       <ScrollView>
-        <View style={styles.notesContainer}>
-          <Text style={styles.notesTitle}>NOTES</Text>
-          {this.state.notes.map(this.listnotes)}
-        </View>
         <View>
-          <TextInput
-            onChangeText={(newNote) => this.setState({ newNote })}
-            multiline={true}
-            value={this.state.newNote}
-            placeholder="Write the note here"
-          />
-          <Button onPress={this.addNote} title="ADD NOTE" />
+          <Button title="Create New Note"
+            onPress={() => navigate('NewNote', { name: 'NewNote' })} />
+        </View>
+        <View style={styles.notesContainer}>
+          {this.state.notes.map(this.listnotes)}
         </View>
       </ScrollView>
     )
@@ -96,7 +135,8 @@ class NotesList extends React.Component {
 
 const AppNavigator = createStackNavigator(
   {
-    Notes: NotesList
+    Notes: NotesList,
+    NewNote: NewNoteScreen
   },
   {
     initialRouteName: "Notes"
@@ -107,7 +147,7 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <NotesList />;
+    return <AppContainer />;
   }
 }
 
@@ -117,7 +157,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 40
+    paddingTop: 20
     //alignItems: 'center'
     //justifyContent: 'center',
   },
