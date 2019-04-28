@@ -2,6 +2,8 @@ import React from 'react';
 import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput, AsyncStorage } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
+const NOTES_STORAGE_KEY = 'ASYNC_STORAGE_NOTES'
+
 class NotesList extends React.Component {
   constructor(props) {
     super(props)
@@ -19,6 +21,32 @@ class NotesList extends React.Component {
     title: 'Notes'
   }
 
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      this.loadNotes();
+    })
+
+    this.props.navigation.addListener("didBlur", () => {
+      this.setState({ loading: true })
+    })
+  }
+
+  loadNotes = async () => {
+    try {
+      const notes = await AsyncStorage.getItem(NOTES_STORAGE_KEY)
+      this.setState({ loading: false })
+
+      if (notes !== null) {
+        console.log("Wow, we have data!")
+        this.setState({ notes: JSON.parse(notes) })
+      }
+
+    } catch (error) {
+      console.error('Noteslist: Failed to load notes.')
+      this.setState({ loading: false, error: true })
+    }
+  }
+
   listnotes = ({ id, content }) => {
     return (
       <Text key={id}>{content}</Text>
@@ -27,6 +55,24 @@ class NotesList extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+
+    if (this.state.loading) {
+      return (
+        <View>
+          <ActivityIndicator animating={true} />
+        </View>
+      )
+    }
+
+    if (this.state.error) {
+      return (
+        <View>
+          <Text>
+            Failed to load notes!
+          </Text>
+        </View>
+      )
+    }
 
     return (
       <ScrollView>
@@ -47,22 +93,41 @@ class NewNoteScreen extends React.Component {
     super(props)
 
     this.state = {
-      notes: [
-        {
-          id: 1,
-          content: "Note 1"
-        },
-        {
-          id: 2,
-          content: "Note 2"
-        },
-      ],
+      notes: [],
       newNote: ''
     }
   }
 
   static navigationOptions = {
     title: 'Create New Note'
+  }
+
+  componentWillMount() {
+    this.loadNotes()
+  }
+
+  loadNotes = async () => {
+    try {
+      const notes = await AsyncStorage.getItem(NOTES_STORAGE_KEY)
+      console.log("Loaded data", JSON.parse(notes))
+
+      if (notes !== null) {
+        this.setState({ notes: JSON.parse(notes) })
+      }
+    } catch (error) {
+      alert(error)
+      console.error('Noteslist: Failed to load notes.')
+    }
+  }
+
+  saveNotes = async () => {
+    try {
+      await AsyncStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(this.state.notes))
+
+    } catch (e) {
+      alert(error)
+      console.error('Newnote: Failed to save a note');
+    }
   }
 
   showAlert = (title, message) => {
@@ -76,7 +141,7 @@ class NewNoteScreen extends React.Component {
     );
   }
 
-  addNote = () => {
+  addNote = async () => {
     console.log(this.state.newNote)
 
     // TODO: Check for an empty submission
@@ -104,10 +169,17 @@ class NewNoteScreen extends React.Component {
 
       const notes = this.state.notes.concat(noteObject)
 
-      this.setState({
-        notes: notes,
-        newNote: ''
-      })
+      try {
+        await AsyncStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes))
+        this.setState({
+          notes: notes,
+          newNote: ''
+        })
+
+      } catch (error) {
+        alert(error)
+        console.error('Newnote: Failed to save a note');
+      }
     }
   }
 
