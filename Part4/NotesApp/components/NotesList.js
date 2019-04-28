@@ -1,31 +1,9 @@
 import React from 'react';
-import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput, AsyncStorage } from 'react-native';
+import { Text, View, Button, ScrollView, AsyncStorage } from 'react-native';
+import LoadingView from '../components/LoadingView';
+import { styles } from '../components/styles';
 
 const NOTES_STORAGE_KEY = 'ASYNC_STORAGE_NOTES'
-
-const styles = StyleSheet.create({
-  notesContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    paddingTop: 20
-    //alignItems: 'center'
-    //justifyContent: 'center',
-  },
-  notesTitle: {
-    color: 'blue'
-  },
-  notes: {
-    color: 'red'
-  },
-  inputContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0
-  }
-});
 
 class NotesList extends React.Component {
   constructor(props) {
@@ -41,7 +19,11 @@ class NotesList extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Notes'
+    title: 'Notes',
+    headerStyle: {
+      backgroundColor: '#52154E'
+    },
+    headerTintColor: '#fff'
   }
 
   componentDidMount() {
@@ -72,7 +54,7 @@ class NotesList extends React.Component {
 
   listnotes = ({ id, content }) => {
     return (
-      <Text key={id}>{content}</Text>
+      <Text key={id} style={styles.note}>{content}</Text>
     )
   }
 
@@ -81,17 +63,15 @@ class NotesList extends React.Component {
 
     if (this.state.loading) {
       return (
-        <View>
-          <ActivityIndicator animating={true} />
-        </View>
+        <LoadingView />
       )
     }
 
     if (this.state.error) {
       return (
         <View>
-          <Text>
-            Failed to load notes!
+          <Text style={styles.error}>
+            Failed to load the notes.
           </Text>
         </View>
       )
@@ -100,7 +80,9 @@ class NotesList extends React.Component {
     return (
       <ScrollView>
         <View>
-          <Button title="Create New Note"
+          <Button
+            title="Create New Note"
+            color="#111344"
             onPress={() => navigate('NewNote', { name: 'NewNote' })} />
         </View>
         <View style={styles.notesContainer}>

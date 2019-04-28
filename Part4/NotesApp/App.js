@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput, AsyncStorage } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 // Components

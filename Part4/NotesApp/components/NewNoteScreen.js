@@ -1,5 +1,7 @@
 import React from 'react';
-import { Alert, Text, View, Button, Styles, StyleSheet, ActivityIndicator, ScrollView, TextInput, AsyncStorage } from 'react-native';
+import { Alert, Text, View, Button, ScrollView, TextInput, AsyncStorage } from 'react-native';
+import LoadingView from '../components/LoadingView';
+import { styles, inputs } from '../components/styles';
 
 const NOTES_STORAGE_KEY = 'ASYNC_STORAGE_NOTES'
 
@@ -8,13 +10,19 @@ class NewNoteScreen extends React.Component {
     super(props)
 
     this.state = {
+      loading: true,
+      error: false,
       notes: [],
       newNote: ''
     }
   }
 
   static navigationOptions = {
-    title: 'Create New Note'
+    title: 'Create New Note',
+    headerStyle: {
+      backgroundColor: '#52154E'
+    },
+    headerTintColor: '#fff'
   }
 
   componentWillMount() {
@@ -26,22 +34,13 @@ class NewNoteScreen extends React.Component {
       const notes = await AsyncStorage.getItem(NOTES_STORAGE_KEY)
       console.log("Loaded data", JSON.parse(notes))
 
+      this.setState({ loading: false })
       if (notes !== null) {
         this.setState({ notes: JSON.parse(notes) })
       }
     } catch (error) {
-      alert(error)
-      console.error('Noteslist: Failed to load notes.')
-    }
-  }
-
-  saveNotes = async () => {
-    try {
-      await AsyncStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(this.state.notes))
-
-    } catch (e) {
-      alert(error)
-      console.error('Newnote: Failed to save a note');
+      this.setState({ error: true })
+      this.showAlert('Error', error);
     }
   }
 
@@ -57,18 +56,11 @@ class NewNoteScreen extends React.Component {
   }
 
   addNote = async () => {
-    console.log(this.state.newNote)
-
-    // TODO: Check for an empty submission
     if (this.state.newNote === '') {
       this.showAlert('Empty Note', "An empty note cannot be added.");
     }
     // Check for duplicates
     else if (this.state.notes.map(note => note.content).indexOf(this.state.newNote) !== -1) {
-
-      // Show an alert
-      console.log("This note already exists");
-
       this.showAlert('Duplicate Note', "Identical note already exists and cannot be added");
 
       this.setState({
@@ -78,7 +70,7 @@ class NewNoteScreen extends React.Component {
     else {
 
       const noteObject = {
-        id: this.state.notes.length + 1,
+        id: this.state.notes.length + 1, // This is a terrible way of generating id-values, but oh well
         content: this.state.newNote
       }
 
@@ -92,22 +84,53 @@ class NewNoteScreen extends React.Component {
         })
 
       } catch (error) {
-        alert(error)
+        this.setState({ error: true })
+        this.showAlert('Error', error);
         console.error('Newnote: Failed to save a note');
       }
     }
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
+    if (this.state.loading) {
+      return (
+        <LoadingView />
+      )
+    }
+
+    if (this.state.error) {
+      return (
+        <View>
+          <Text>
+            We are sorry to inform you that an error has occurred.
+          </Text>
+        </View>
+      )
+    }
+
     return (
       <View>
-        <TextInput
-          onChangeText={(newNote) => this.setState({ newNote })}
-          multiline={true}
-          value={this.state.newNote}
-          placeholder="Write the note here"
-        />
-        <Button onPress={this.addNote} title="ADD NOTE" />
+        <View>
+          <Button
+            title="Back to note list"
+            color="#111344"
+            onPress={() => navigate('Notes', { name: 'Notes' })} />
+        </View>
+        <View style={inputs.inputsContainer}>
+          <TextInput
+            style={inputs.textField}
+            onChangeText={(newNote) => this.setState({ newNote })}
+            multiline={true}
+            value={this.state.newNote}
+            placeholder="Write the note here"
+          />
+          <Button
+            title="ADD NOTE"
+            color="#3423A6"
+            onPress={this.addNote} />
+        </View>
       </View>
     )
   }
