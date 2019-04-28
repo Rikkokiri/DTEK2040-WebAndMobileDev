@@ -5,12 +5,17 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 class NotesList extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      notes: [],
+      newNote: ''
+    };
   }
 
   render() {
     return (
       <View>
-        <View>
+        <ScrollView>
           <Text>"Note 1"</Text>
           <Text>"Note 2"</Text>
           <Text>"Note 3"</Text>
@@ -27,21 +32,59 @@ class NotesList extends React.Component {
           <Text>"Note 14"</Text>
           <Text>"Note 15"</Text>
           <Text>"Note 16"</Text>
-          <Text>"Note 17"</Text>
-          <Text>"Note 18"</Text>
-          <Text>"Note 19"</Text>
-          <Text>"Note 20"</Text>
-          <Text>"Note 21"</Text>
-          <Text>"Note 22"</Text>
-          <Text>"Note 23"</Text>
-          <Text>"Note 24"</Text>
-          <Text>"Note 25"</Text>
-          <Text>"Note 26"</Text>
-        </View>
-        <View>
-          <TextInput placeholder="Write the note here" />
-          <Button onPress={() => alert("Button pressed")} title="ADD NOTE" />
-        </View>
+          <Text>"Note LOL"</Text>
+          <Text>"Note 2"</Text>
+          <Text>"Note 3"</Text>
+          <Text>"Note 4"</Text>
+          <Text>"Note 5"</Text>
+          <Text>"Note 6"</Text>
+          <Text>"Note 7"</Text>
+          <Text>"Note 8"</Text>
+          <Text>"Note 9"</Text>
+          <Text>"Note 10"</Text>
+          <Text>"Note 11"</Text>
+          <Text>"Note 12"</Text>
+          <Text>"Note 13"</Text>
+          <Text>"Note 14"</Text>
+          <Text>"Note 15"</Text>
+          <Text>"Note 16"</Text>
+          <Text>"Note YEET"</Text>
+          <Text>"Note 2"</Text>
+          <Text>"Note 3"</Text>
+          <Text>"Note 4"</Text>
+          <Text>"Note 5"</Text>
+          <Text>"Note 6"</Text>
+          <Text>"Note 7"</Text>
+          <Text>"Note 8"</Text>
+          <Text>"Note 9"</Text>
+          <Text>"Note 10"</Text>
+          <Text>"Note 11"</Text>
+          <Text>"Note 12"</Text>
+          <Text>"Note 13"</Text>
+          <Text>"Note 14"</Text>
+          <Text>"Note 15"</Text>
+          <Text>"Note 16"</Text>
+
+          <View>
+            <TextInput
+              onChangeText={(newNote) => this.setState({ newNote })}
+              multiline={true}
+              value={this.state.newNote}
+              placeholder="Write the note here"
+            />
+            <Button onPress={() => {
+              console.log(this.state.newNote)
+
+              const notes = this.state.notes.concat(this.state.newNote)
+
+              this.setState({
+                notes: notes,
+                newNote: ''
+              })
+            }} title="ADD NOTE" />
+          </View>
+        </ScrollView>
+
       </View>
     )
   }
